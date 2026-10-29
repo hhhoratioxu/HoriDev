@@ -79,6 +79,7 @@ export function Navbar() {
           className="icon-button mobile-menu"
           onClick={() => setOpen(!open)}
           aria-label="展开导航"
+          aria-expanded={open}
         >
           {open ? <X size={19} /> : <Menu size={19} />}
         </button>

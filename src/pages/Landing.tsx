@@ -14,16 +14,15 @@ import {
   ChevronDown,
   Code2,
   FileCode2,
-  Play,
   ShieldCheck,
   Download,
   CircleDot,
-  Zap,
   LockKeyhole,
 } from 'lucide-react';
 import { Navbar, Logo, Spinner, ErrorBox } from '../components/ui';
 import { useAuth } from '../lib/context';
 import { serviceOptions } from '../../shared/contracts';
+import { BrandSculpture } from '../components/BrandSculpture';
 const icons = {
   terminal: Terminal,
   globe: Globe2,
@@ -98,7 +97,7 @@ function ProductPreview() {
   const [active, setActive] = useState<keyof typeof examples>('python');
   const sample = examples[active];
   return (
-    <div className="product-preview glass">
+    <div className="product-preview">
       <div className="preview-window-top">
         <div className="traffic-lights">
           <i />
@@ -121,6 +120,7 @@ function ProductPreview() {
               key={key}
               onClick={() => setActive(key as keyof typeof examples)}
               className={active === key ? 'active' : ''}
+              aria-pressed={active === key}
             >
               <FileCode2 size={14} />
               {item.name}
@@ -201,10 +201,7 @@ export function PlanCards() {
   return (
     <div className="pricing-grid">
       {config.plans.map((plan) => (
-        <article
-          className={`pricing-card glass ${plan.highlighted ? 'highlighted' : ''}`}
-          key={plan.id}
-        >
+        <article className={`pricing-card ${plan.highlighted ? 'highlighted' : ''}`} key={plan.id}>
           {plan.highlighted && <span className="recommended">更多创造空间</span>}
           <span className="plan-name">{plan.name}</span>
           <p>{plan.description}</p>
@@ -233,23 +230,31 @@ export function PlanCards() {
 export function Footer() {
   const { config } = useAuth();
   return (
-    <footer className="site-footer">
-      <div>
-        <Logo />
-        <p>描述你的想法，让 AI 帮你实现。</p>
+    <footer className="site-footer brand-footer">
+      <div className="footer-main">
+        <div>
+          <Logo />
+          <p>让想法，成为作品。</p>
+        </div>
+        <nav aria-label="页脚导航">
+          <Link to="/dashboard">开始创造</Link>
+          <Link to="/pricing">价格方案</Link>
+          <a href="/#faq">常见问题</a>
+          {config?.contact && (
+            <a href={`mailto:${config.contact}`}>
+              联系 HoriDev <ArrowUpRight size={14} />
+            </a>
+          )}
+        </nav>
       </div>
-      <div>
-        <Link to="/pricing">价格方案</Link>
-        <Link to="/dashboard">工作台</Link>
-        {config?.contact ? (
-          <a href={`mailto:${config.contact}`}>
-            联系 HoriDev <ArrowUpRight size={12} />
-          </a>
-        ) : (
-          <a href="/#faq">服务说明</a>
-        )}
+      <div className="footer-wordmark" aria-hidden="true">
+        HoriDev<span>.</span>
       </div>
-      <small>© {new Date().getFullYear()} HoriDev. Made for your next idea.</small>
+      <div className="footer-meta">
+        <small>© {new Date().getFullYear()} HoriDev.</small>
+        <small>AI-Powered Software Development</small>
+        <span>Made for what's next.</span>
+      </div>
     </footer>
   );
 }
@@ -263,68 +268,143 @@ export function Landing() {
       </a>
       <Navbar />
       <main id="main" tabIndex={-1}>
-        <section className="hero">
-          <div className="hero-ambient ambient-one" />
-          <div className="hero-ambient ambient-two" />
+        <section className="hero brand-hero">
           <div className="hero-copy">
-            <span className="hero-pill">
-              <span className="pill-dot" /> 从想法到软件，一次全新的创造方式{' '}
-              <ArrowUpRight size={13} />
-            </span>
+            <span className="brand-kicker">HoriDev. 为创造而来。</span>
             <h1>
               想法已就绪。
               <br />
-              <span>让创造，自然发生。</span>
+              <span>创造，再简单一点。</span>
             </h1>
             <p>
               描述你的想法，让 AI 帮你实现。
-              <br className="desktop-break" />
-              从自动化脚本到完整网站，把灵感变成触手可及的作品。
+              <br />
+              从一句需求，到可以带走的完整源码。
             </p>
             <div className="hero-actions">
               <Link to={start} className="button primary large">
-                开始创建 <ArrowRight size={18} />
+                开始创造 <ArrowUpRight size={18} />
               </Link>
-              <a href="#workspace-preview" className="button secondary large">
-                <Play size={15} fill="currentColor" /> 探索工作空间
+              <a href="#workspace-preview" className="brand-text-link">
+                探索工作空间 <ChevronDown size={17} />
               </a>
             </div>
-            <div className="hero-assurances">
-              <span>
-                <Check size={13} /> 源码完整交付
-              </span>
-              <span>
-                <Check size={13} /> 费用清晰可控
-              </span>
-              <span>
-                <Check size={13} /> 创造由你掌握
-              </span>
-            </div>
           </div>
-          <div id="workspace-preview" className="hero-product">
-            <div className="floating-note">
-              <span className="sparkle-icon">
-                <Sparkles size={18} />
-              </span>
-              <div>
-                <b>你的下一件作品</b>
-                <span>从一句话开始。</span>
+          <BrandSculpture />
+          <div className="hero-bottomline">
+            <span>你的想法。你的代码。你的下一件作品。</span>
+            <a href="#services">
+              向下探索 <ChevronDown size={14} />
+            </a>
+          </div>
+        </section>
+        <section id="workspace-preview" className="brand-showcase">
+          <div className="brand-section-intro">
+            <span className="brand-kicker">认识 HoriDev Workspace</span>
+            <h2>
+              思路，代码，可能性。
+              <br />
+              <span>在同一个空间相遇。</span>
+            </h2>
+            <p>
+              与 AI 一起梳理需求、编辑源码、比较每一次修改。
+              <br />
+              让创造的过程，和结果一样清晰。
+            </p>
+          </div>
+          <div className="brand-product-stage">
+            <ProductPreview />
+          </div>
+          <div className="showcase-footnote">
+            <span>
+              <CircleDot size={13} /> 可切换的产品界面示例
+            </span>
+            <span>源码编辑 · 版本比较 · 完整导出</span>
+          </div>
+        </section>
+        <section className="brand-feature-grid">
+          <article className="brand-feature feature-automation">
+            <span className="brand-kicker">把时间，留给更重要的事。</span>
+            <h2>
+              少一点重复。
+              <br />
+              多一点创造。
+            </h2>
+            <p>
+              让自动化接手繁琐工作。
+              <br />
+              从一张表格，到一个为你而生的小工具。
+            </p>
+            <a href="#services" className="brand-text-link">
+              发现产品能力 <ArrowRight size={16} />
+            </a>
+            <div className="automation-art" aria-label="Excel 按月份分类的示例示意">
+              <div className="sheet-card">
+                <div>
+                  <Database size={17} />
+                  <span>工作数据.xlsx</span>
+                </div>
+                <div className="sheet-grid">
+                  {Array.from({ length: 15 }, (_, i) => (
+                    <i key={i} />
+                  ))}
+                </div>
+              </div>
+              <div className="automation-arrow">
+                <ArrowRight size={22} />
+              </div>
+              <div className="output-stack">
+                {['2026-08.xlsx', '2026-09.xlsx', '2026-10.xlsx'].map((name) => (
+                  <div key={name}>
+                    <FileCode2 size={15} />
+                    {name}
+                  </div>
+                ))}
+              </div>
+              <small>自动化流程示意</small>
+            </div>
+          </article>
+          <article className="brand-feature feature-ownership">
+            <span className="brand-kicker">每一行代码，都属于你。</span>
+            <h2>
+              创造，
+              <br />
+              不设围墙。
+            </h2>
+            <p>
+              查看、修改、下载完整源码。
+              <br />
+              下一步怎么走，由你决定。
+            </p>
+            <Link to={start} className="brand-text-link">
+              打开你的工作空间 <ArrowRight size={16} />
+            </Link>
+            <div className="ownership-art" aria-hidden="true">
+              <div className="source-bracket">
+                &lt;<span>/</span>&gt;
+              </div>
+              <div className="source-file-pills">
+                <span>
+                  <FileCode2 size={14} /> main.py
+                </span>
+                <span>
+                  <FileCode2 size={14} /> README.md
+                </span>
+                <span>
+                  <Download size={14} /> project.zip
+                </span>
               </div>
             </div>
-            <ProductPreview />
-            <div className="product-caption">
-              <span className="line" /> YOUR IDEAS. BEAUTIFULLY BUILT. <span className="line" />
-            </div>
-          </div>
+          </article>
         </section>
         <section id="services" className="section services-section">
           <div className="section-top">
             <div>
               <span className="eyebrow">BUILT AROUND YOUR IDEAS</span>
               <h2>
-                不止一种想法。
+                为每一种想法，
                 <br />
-                不止一种可能。
+                找到实现的方式。
               </h2>
             </div>
             <p>
@@ -339,7 +419,7 @@ export function Landing() {
               return (
                 <Link
                   to={`${start}${me ? '' : `?service=${s.id}`}`}
-                  className="service-card glass"
+                  className="service-card"
                   key={s.id}
                 >
                   <span className={`service-icon tone-${i}`}>
@@ -399,7 +479,7 @@ export function Landing() {
               </article>
             ))}
           </div>
-          <div className="honest-note glass">
+          <div className="honest-note">
             <ShieldCheck size={22} />
             <div>
               <b>清晰的边界，让创造更安心。</b>
@@ -463,22 +543,20 @@ export function Landing() {
             ))}
           </div>
         </section>
-        <section className="final-cta section">
-          <div className="cta-orb" />
-          <span className="eyebrow">THE NEXT THING STARTS WITH YOU</span>
+        <section className="final-cta section brand-final-cta">
+          <span className="brand-kicker">让下一件好作品，从你开始。</span>
           <h2>
             那个想了很久的点子。
             <br />
-            <span>现在，就让它发生。</span>
+            <span>现在，给它一个开始。</span>
           </h2>
           <Link to={start} className="button primary large">
-            开始我的第一个项目 <ArrowRight size={18} />
+            开始我的第一个项目 <ArrowUpRight size={18} />
           </Link>
           <p>
-            <Zap size={13} />
             {config?.mode === 'live'
               ? 'Live 模式 · 资源授权后开始'
-              : '演示模式已就绪 · 无需配置 API 即可体验'}
+              : '免费体验预置演示，无 API 消耗。'}
           </p>
         </section>
       </main>
@@ -497,7 +575,7 @@ export function Pricing() {
           <p>先确认你需要什么，再决定如何开始。</p>
         </div>
         <PlanCards />
-        <div className="honest-note glass">
+        <div className="honest-note">
           <ShieldCheck size={23} />
           <div>
             <b>没有隐藏扣款，也没有虚假付款。</b>

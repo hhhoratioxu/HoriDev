@@ -67,6 +67,12 @@ test('landing, registration, project, demo delivery, version edit and download',
     );
     expect(overflow).toBe(false);
   }
+  if (testInfo.project.name === 'chromium') {
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.goto('/dashboard');
+    await expect(page.getByRole('heading', { name: '近期项目' })).toBeVisible();
+    await page.screenshot({ path: 'artifacts/dashboard-desktop.png', fullPage: true });
+  }
   expect(errors).toEqual([]);
 });
 test('responsive landing and keyboard navigation with reduced motion', async ({
@@ -86,4 +92,20 @@ test('responsive landing and keyboard navigation with reduced motion', async ({
   await expect(page).toHaveURL(/#main$/);
   if (testInfo.project.name === 'chromium')
     await page.screenshot({ path: 'artifacts/landing-mobile.png', fullPage: true });
+  await page.getByRole('button', { name: '展开导航' }).click();
+  await expect(
+    page.getByRole('navigation', { name: '主导航' }).getByRole('link', { name: '如何工作' }),
+  ).toBeVisible();
+  await page.getByRole('button', { name: '展开导航' }).click();
+  await page.getByRole('button', { name: 'api.ts', exact: true }).click();
+  await expect(page.locator('.preview-code')).toContainText('const app = new Hono();');
+  await expect(page.getByRole('button', { name: 'api.ts', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await page.setViewportSize({ width: 1280, height: 900 });
+  if (await page.getByRole('button', { name: '切换深色模式' }).isVisible())
+    await page.getByRole('button', { name: '切换深色模式' }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect(page.getByRole('link', { name: '开始创造', exact: true }).first()).toBeVisible();
 });

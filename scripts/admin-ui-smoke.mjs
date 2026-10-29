@@ -101,11 +101,7 @@ try {
   await page.goto(origin + '/');
   if (await page.getByRole('button', { name: '切换深色模式' }).isVisible())
     await page.getByRole('button', { name: '切换深色模式' }).click();
-  await page.waitForFunction(
-    () =>
-      getComputedStyle(document.querySelector('.hero-actions .button.secondary'))
-        .backgroundColor === 'rgb(28, 32, 44)',
-  );
+  await page.waitForFunction(() => document.documentElement.dataset.theme === 'dark');
   await page.screenshot({
     path: new URL('../artifacts/landing-dark.png', import.meta.url).pathname,
   });

@@ -8,6 +8,7 @@ import { AuthPage } from './pages/Auth';
 import { Dashboard } from './pages/Dashboard';
 import { SettingsPage } from './pages/Settings';
 import './styles.css';
+import './brand.css';
 const Workspace = lazy(() => import('./pages/Workspace'));
 const Admin = lazy(() => import('./pages/Admin'));
 function Protected({ children }: { children: React.ReactNode }) {

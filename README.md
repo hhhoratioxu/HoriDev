@@ -4,6 +4,12 @@
 
 HoriDev — AI-Powered Software Development，是一套可以在本地运行、部署到 Cloudflare Workers 的 AI 软件交付 MVP。React 工作区、Hono API、Better Auth 身份认证、D1 数据和官方 OpenAI Responses 客户端均已实现。首版交付源码与 AI 静态审查，不执行任何客户或模型生成的程序。
 
+## 品牌界面
+
+首页采用大字号、黑白灰、通栏产品展示与原创环形视觉，参考 Apple 产品官网的展示节奏和 OpenAI 的简洁排版。工作台、编程区、认证与管理后台共用同一套中性色和字体尺度，支持深浅模式、手机导航和减少动态效果。
+
+视觉主题集中在 `src/brand.css`，原创矢量主视觉位于 `src/components/BrandSculpture.tsx`；没有使用 Apple 或 OpenAI 的 Logo、专有图片或付费字体。
+
 ## 快速开始
 
 需要 Node.js 22.12+（推荐 24 LTS）和 pnpm 11。本项目的 `./horidev` 启动器也能在当前 Mac 上找到 Codex 自带的运行环境。

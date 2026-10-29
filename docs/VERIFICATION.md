@@ -85,3 +85,13 @@
 浏览器验收会创建 `.example.test` 邮箱的本地测试账号与演示项目，这些数据仅保留在被 Git 忽略的本地 D1 中，不会同步到生产。
 
 管理员浏览器验收可在 8787 端口空闲时运行 `./horidev exec node scripts/admin-ui-smoke.mjs`。脚本只允许 development + demo，临时创建账号并授予本地白名单权限，重启自己启动的 Worker，完成验证后恢复私有配置并删除临时账号。
+
+## 品牌视觉改版回归（2026-10-29）
+
+此次改版采用大标题、黑白灰、通栏产品展示与原创环形矢量视觉，并统一工作台、编程区、账号页面与管理后台的字号、间距和控件。没有修改真实模型、预算或权限逻辑；本次回归使用 Demo，不产生新的付费模型调用。
+
+- TypeScript、ESLint、Prettier、44 项单元/API 测试与前端/Workers 打包已通过。
+- Chromium 与 WebKit 的 4 项浏览器流程通过，覆盖原有注册/项目/演示交付/实际编辑/保存/Diff/下载，以及手机导航、键盘跳转、深色模式和界面示例切换。
+- 320、360、390、768、1024、1440 像素宽度已实际检查，没有横向溢出；320–390 像素下主标题保持两行。
+- 管理后台的 Chromium 本地验收再次通过，包括密码重新验证、真实统计、用户表、预算保存和深色模式，临时管理账号与配置已清理恢复。
+- 新版截图：`artifacts/redesign-hero.png`、`redesign-home-full.png`、`redesign-mobile.png`、`redesign-dark.png`；工作台为 `artifacts/dashboard-desktop.png`，编程区截图已更新。
