@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-29T02:49:58.714Z",
+  "mode": "live",
+  "budget": {
+    "internalHardUsd": 0.09
+  },
+  "scope": "isolated local Workers/D1 acceptance; manual order fixture; generated source never executed",
+  "stages": [
+    {
+      "stage": "analyze",
+      "status": "completed"
+    },
+    {
+      "stage": "generate",
+      "status": "completed"
+    },
+    {
+      "stage": "review",
+      "status": "completed"
+    }
+  ],
+  "usage": [
+    {
+      "stage": "analyze",
+      "model": "gpt-6-luna",
+      "input_tokens": 387,
+      "output_tokens": 283,
+      "cached_tokens": 0,
+      "cost_micros": 181,
+      "reserved_micros": 0,
+      "status": "settled",
+      "request_id": "resp_0c7b0d3b600238c2016ae2b45926e887d099e230db2cd4399b"
+    },
+    {
+      "stage": "generate",
+      "model": "gpt-6-luna",
+      "input_tokens": 647,
+      "output_tokens": 557,
+      "cached_tokens": 0,
+      "cost_micros": 344,
+      "reserved_micros": 0,
+      "status": "settled",
+      "request_id": "resp_04e8c360e3ce4862016ae2b45d64d087d09bb63690fdb7f5de"
+    },
+    {
+      "stage": "review",
+      "model": "gpt-6-luna",
+      "input_tokens": 1197,
+      "output_tokens": 228,
+      "cached_tokens": 0,
+      "cost_micros": 234,
+      "reserved_micros": 0,
+      "status": "settled",
+      "request_id": "resp_0649b890f5ab3273016ae2b4631c0087d09cd26f6037a7eba4"
+    }
+  ],
+  "passed": true
+}

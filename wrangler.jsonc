@@ -1,0 +1,53 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "horidev",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"],
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "horidev",
+      "database_id": "00000000-0000-0000-0000-000000000001",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "vars": {
+    "APP_ENV": "development",
+    "APP_URL": "http://localhost:5173",
+    "AI_MODE": "demo",
+    "OPENAI_MODEL_ECONOMY": "gpt-6-luna",
+    "OPENAI_MODEL_STANDARD": "gpt-6.1-sol",
+    "LIVE_CALLS_ENABLED": "false",
+    "ALLOW_REGISTRATION": "false",
+  },
+  "observability": { "enabled": true },
+  "env": {
+    "production": {
+      "name": "horidev",
+      "vars": {
+        "APP_ENV": "production",
+        "APP_URL": "https://YOUR-DOMAIN.example",
+        "AI_MODE": "demo",
+        "LIVE_CALLS_ENABLED": "false",
+        "ALLOW_REGISTRATION": "false",
+        "OPENAI_MODEL_ECONOMY": "gpt-6-luna",
+        "OPENAI_MODEL_STANDARD": "gpt-6.1-sol",
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "horidev-production",
+          "database_id": "00000000-0000-0000-0000-000000000002",
+          "migrations_dir": "migrations",
+        },
+      ],
+    },
+  },
+}

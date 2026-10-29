@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-worker
+.wrangler
+.wrangler-test
+pnpm-lock.yaml
+.dev.vars
+coverage
+test-results
+artifacts

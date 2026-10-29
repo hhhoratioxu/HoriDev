@@ -1,0 +1,14 @@
+# 复制后执行 pnpm setup 生成随机会话密钥。不要提交 .dev.vars。
+BETTER_AUTH_SECRET=
+APP_ENV=development
+APP_URL=http://localhost:5173
+AI_MODE=demo
+# 设置真实密钥后，还需要 AI_MODE=live、LIVE_CALLS_ENABLED=true 和管理员人工授权订单。
+OPENAI_API_KEY=
+OPENAI_MODEL_ECONOMY=gpt-6-luna
+OPENAI_MODEL_STANDARD=gpt-6.1-sol
+OPENAI_TIMEOUT_MS=120000
+LIVE_CALLS_ENABLED=false
+ADMIN_USER_IDS=
+ALLOW_REGISTRATION=false
+CONTACT_EMAIL=

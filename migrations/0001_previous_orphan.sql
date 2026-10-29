@@ -1,0 +1,1 @@
+ALTER TABLE `usage_records` ADD `price_snapshot` text;

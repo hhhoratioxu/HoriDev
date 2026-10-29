@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "engine": "Chromium",
+  "scope": "local Workers/D1, temporary allowlisted admin, real password reauthentication, user table, unchanged budget save, dark mode; no model calls",
+  "temporaryUserRemoved": true
+}

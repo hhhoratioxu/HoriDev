@@ -1,0 +1,20 @@
+#!/bin/sh
+set -eu
+HORIDEV_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+cd "$HORIDEV_ROOT"
+HORIDEV_RUNTIME="$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies"
+if ! command -v node >/dev/null 2>&1 && [ -x "$HORIDEV_RUNTIME/node/bin/node" ]; then
+  PATH="$HORIDEV_RUNTIME/node/bin:$PATH"
+fi
+if ! command -v pnpm >/dev/null 2>&1 && [ -x "$HORIDEV_RUNTIME/bin/fallback/pnpm" ]; then
+  PATH="$HORIDEV_RUNTIME/bin/fallback:$PATH"
+fi
+export PATH
+if ! command -v node >/dev/null 2>&1 || ! command -v pnpm >/dev/null 2>&1; then
+  printf '%s\n' '请安装 Node.js 22.12+（推荐 24 LTS）与 pnpm 11，再运行此脚本。' >&2
+  exit 1
+fi
+if [ "$#" -gt 0 ] && node --input-type=module -e 'import fs from "node:fs"; const pkg = JSON.parse(fs.readFileSync("package.json", "utf8")); process.exit(Object.hasOwn(pkg.scripts || {}, process.argv[1]) ? 0 : 1);' "$1"; then
+  exec pnpm run "$@"
+fi
+exec pnpm "$@"
