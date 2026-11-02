@@ -88,11 +88,11 @@ R2 可能需要开通账单，存储和操作有各自额度及费用，请先�
 
 ## GitHub
 
-交付已初始化本地 Git。创建自己的私有 GitHub 仓库后，通过审核的源码提交和推送即可。不要上传 `.dev.vars`、`.wrangler/`、`node_modules/` 或本地账号数据。
+源码仓库为 [hhhoratioxu/HoriDev](https://github.com/hhhoratioxu/HoriDev)。可以直接克隆，或 Fork 到自己的账号后配置部署。不要上传 `.dev.vars`、`.wrangler/`、`node_modules/` 或本地账号数据；其他环境应自行创建私有配置和密钥。
 
 `ci.yml` 对推送与 PR 执行类型、风格、格式、模拟测试、构建；`deploy.yml` 仅支持 workflow_dispatch。先在仓库的 production Environment 设置审批保护和最小权限 Cloudflare API Token，然后配置 `CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID` Secrets。OpenAI 和会话密钥应已通过 Wrangler 存在 Worker Secrets 中，不需要进入构建阶段。
 
-生产工作流会先远程应用迁移再部署。务必先替换 production 中的示例 UUID 与域名。云端 CI 和部署只有实际执行后才算验证，当前本地成功不能证明云端已上线。
+生产工作流会先远程应用迁移再部署。务必先替换 production 中的示例 UUID 与域名。源码推送仅触发检查，不自动部署。云端 CI 和部署只有实际执行后才算验证，当前本地成功不能证明云端已上线。
 
 ## 地区、政策和费用
 

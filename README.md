@@ -4,6 +4,10 @@
 
 HoriDev — AI-Powered Software Development，是一套可以在本地运行、部署到 Cloudflare Workers 的 AI 软件交付 MVP。React 工作区、Hono API、Better Auth 身份认证、D1 数据和官方 OpenAI Responses 客户端均已实现。首版交付源码与 AI 静态审查，不执行任何客户或模型生成的程序。
 
+源码仓库：[hhhoratioxu/HoriDev](https://github.com/hhhoratioxu/HoriDev)。仓库公开源码和本地验收记录，不包含 API 密钥、账号数据库或云端部署。
+
+![HoriDev 首页：大字号、黑白灰与原创环形视觉](artifacts/redesign-hero.png)
+
 ## 品牌界面
 
 首页采用大字号、黑白灰、通栏产品展示与原创环形视觉，参考 Apple 产品官网的展示节奏和 OpenAI 的简洁排版。工作台、编程区、认证与管理后台共用同一套中性色和字体尺度，支持深浅模式、手机导航和减少动态效果。
@@ -12,10 +16,11 @@ HoriDev — AI-Powered Software Development，是一套可以在本地运行、�
 
 ## 快速开始
 
-需要 Node.js 22.12+（推荐 24 LTS）和 pnpm 11。本项目的 `./horidev` 启动器也能在当前 Mac 上找到 Codex 自带的运行环境。
+需要 Node.js 22.12+（推荐 24 LTS）、pnpm 11 和 Git。`./horidev` 启动器优先使用系统安装的 Node.js 与 pnpm，也兼容开发机上的 Codex 运行环境。
 
 ```sh
-cd /Users/hhhoratioxu/Documents/CodeX/HoriDev
+git clone https://github.com/hhhoratioxu/HoriDev.git
+cd HoriDev
 ./horidev install --frozen-lockfile
 ./horidev setup
 ./horidev dev
@@ -122,7 +127,9 @@ HoriDev/
 - [内部预算、实际 usage 与费用估算](docs/COSTS.md)
 - [API 与任务状态约定](docs/API.md)
 
-生产配置保留不可部署的示例域名和 D1 ID；`./horidev deploy` 会先检查是否已替换，避免把开发配置误部署。当前交付没有创建 Cloudflare 云端资源、购买服务或推送到 GitHub。
+生产配置保留不可部署的示例域名和 D1 ID；`./horidev deploy` 会先检查是否已替换，避免把开发配置误部署。源码发布到 GitHub 不会创建 Cloudflare 云端资源、购买服务或部署网站；生产部署工作流仅支持手动触发。
+
+当前生产架构依赖 Cloudflare Workers 和 D1。在 Linux 服务器上使用 Node.js 与 pnpm 进行开发、构建或本地预览，与直接把它作为独立 Linux 生产服务运行是不同的部署方式；后者仍需要适配服务端运行时、数据库和持久化存储。详细配置见部署文档。
 
 ## 已知限制与商业化后续
 
@@ -136,4 +143,4 @@ HoriDev/
 - 内部预算无法替代 OpenAI 平台账单限制；新项目的账本也不包含此密钥在其他系统中的历史消耗。
 - Worker 免费计划的 CPU 限制可能影响密码哈希和大型 ZIP；实际云端负载、账号地区和服务可用性需部署后验收，必要时在授权后使用付费计划。
 
-建议下一阶段先完成真实 API 小预算验收与受邀用户试运行，再接入邮件验证、滥用防护、支付 webhook 的幂等状态机、完整审计/隐私流程，最后扩展长时任务和独立隔离执行服务。
+一次真实 API 小预算验收已完成。建议下一阶段开展受邀用户试运行，再接入邮件验证、滥用防护、支付 webhook 的幂等状态机、完整审计/隐私流程，最后扩展长时任务和独立隔离执行服务。

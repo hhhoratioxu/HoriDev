@@ -1,6 +1,6 @@
 # 本地验收记录
 
-日期：2026-10-29（Asia/Taipei）。设备：当前 macOS Apple Silicon 开发机。以下结果只代表明确列出的环境，不能替代真实云端、公开用户负载或客户程序的运行验收。
+本地验收日期：2026-10-29（Asia/Taipei）。设备：macOS Apple Silicon 开发机。以下结果只代表明确列出的环境，不能替代真实云端、公开用户负载或客户程序的运行验收。GitHub 上的后续检查以 [Actions 实际运行记录](https://github.com/hhhoratioxu/HoriDev/actions) 为准。
 
 ## 已完成的验证
 
@@ -55,7 +55,7 @@
 ## 仍未验证或未接入
 
 - gpt-6.1-sol 的账号访问权限与复杂任务质量尚未实际调用验证。
-- 没有部署 Cloudflare 生产 Worker、远程 D1 或 R2；没有 GitHub 远程推送、CI 执行或云端负载测试。
+- 没有部署 Cloudflare 生产 Worker、远程 D1 或 R2，也没有云端负载测试。2026-10-29 本地验收时尚未推送 GitHub；源码发布和后续 CI 不代表生产环境已部署。
 - 没有原生 Safari/Chrome 人工完整验收，只有上述浏览器引擎自动化。
 - 没有在线支付、邮件发送/找回/验证、Turnstile、MFA 或隔离代码执行服务。
 - AI 审查仅为静态模型输出，既不证明语法正确，也不证明程序运行和测试通过。
